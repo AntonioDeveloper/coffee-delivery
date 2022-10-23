@@ -5,11 +5,7 @@ import { useState, useEffect } from 'react';
 import { api } from "../../components/Api";
 import { Product } from "../../@types/Products";
 
-interface ShelfProducts {
-  items: Product[];
-}
-
-export function Home({ items }: ShelfProducts) {
+export function Home() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -20,12 +16,10 @@ export function Home({ items }: ShelfProducts) {
       });
   }, [])
 
-  console.log(products);
-
   return (
     <HomeContainer>
       <Banner />
-      <ShelfContainer prod={items} />
+      <ShelfContainer prod={products} />
     </HomeContainer>
   )
 }
