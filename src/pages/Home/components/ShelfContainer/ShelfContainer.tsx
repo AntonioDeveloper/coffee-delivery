@@ -1,12 +1,34 @@
 import { Product } from "../../../../@types/Products";
 import { ShelfStylesContainer } from "./styles";
+import { HTMLInputTypeAttribute, useState } from "react";
+import { InputProps } from "../../../../../src/@types/ShelfContainerTypes"
 
 interface Props {
   prod: Product[];
 }
 
 export function ShelfContainer({ prod }: Props) {
-  console.log(prod);
+
+  const [quantity, setQuantity] = useState<number>(0);
+
+  const productQtInput = document.querySelector("#input-quantity") as HTMLInputElement;
+
+  let productQt = productQtInput?.value;
+  console.log(productQtInput)
+
+  function handleDecreaseQt() {
+    if (Number(productQt) > 0) {
+      setQuantity(quantity => quantity - 1);
+      console.log("quantity", quantity);
+    } else {
+      console.log("zero", quantity);
+    }
+  }
+
+  function handleIncreaseQt() {
+    setQuantity(quantity => quantity + 1);
+    console.log("quantity", quantity);
+  }
 
   return (
     <ShelfStylesContainer>
@@ -14,7 +36,7 @@ export function ShelfContainer({ prod }: Props) {
       <div className="product-container">
         {prod.map(product => {
           return (
-            <div className="coffee-item">
+            <div className="coffee-item" key={product.name}>
               <img src={product.image} alt={product.name} />
               <div className="cathegory-container">
                 {
@@ -29,11 +51,12 @@ export function ShelfContainer({ prod }: Props) {
               <h3 className="coffee-name">{product.name}</h3>
               <p className="description">{product.description}</p>
               <div className="prod-card-footer">
-                <span className="price">R$ {product.price}</span>
+                <span className="price"><span>R$</span> {product.price}</span>
                 <div className="product-quantity-selector">
-                  <button className="decrease">-</button>
-                  <input id="input-quantity" type="number" min="0" max="20" />
-                  <button className="increase">+</button>
+                  <button className="decrease" onClick={handleDecreaseQt}>-</button>
+                  <input id="input-quantity" type="number" min="0" max="20" defaultValue={quantity} />
+                  <button className="increase" onClick={handleIncreaseQt}>+</button>
+                  <button className="push-to-cart"></button>
                 </div>
               </div>
             </div>

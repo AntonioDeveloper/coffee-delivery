@@ -88,8 +88,74 @@ h1 {
     }
 
     .prod-card-footer {
+      width: 100%;
+      margin-top: 2rem;
       display: flex;
-      
+      justify-content: space-evenly;
+      align-items: center;
+
+      .price {
+        font-family: "Baloo 2", sans-serif;
+        font-size: 1.5rem;
+
+        span {
+          font-family: "Roboto", sans-serif;
+          color: ${props => props.theme.text};
+          font-size: 1rem;
+        }
+      }
+
+      .product-quantity-selector {
+        width: 60%;
+        height: 2.38rem;
+        display: flex;
+
+        .decrease, .increase {
+          background-color: ${(props) => props.theme.button};
+          color: ${props => props.theme.purple};
+          width: 18%;
+          height: 2.38rem;
+          border: none;
+          font-size: 1rem;
+          font-weight: bold;
+          cursor: pointer;
+        }
+
+        #input-quantity {
+          width: 35%;
+          height: 2.38rem;
+          border: none;
+          background-color: ${(props) => props.theme.button};
+          text-align: center;
+  
+          /* Chrome, Safari, Edge, Opera */
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+  
+          /* Firefox */
+          &[type=number] {
+            -moz-appearance: textfield;
+          }
+        }
+  
+        .push-to-cart {
+          width: 2.38rem;
+          height: 2.38rem;
+          padding: .5rem;
+          margin-left: 4%;
+  
+          background-image: url("../../../../src/assets/cart-white.png");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-color: ${props => props.theme.purpleDark};
+  
+          border: none;
+          border-radius: 6px;
+        }
+      }
     }
   }
 }
