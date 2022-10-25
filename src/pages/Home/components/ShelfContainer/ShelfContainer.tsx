@@ -11,25 +11,45 @@ export function ShelfContainer({ prod }: Props) {
 
   const [quantity, setQuantity] = useState<number>(0);
 
+  const [chosenProd, setChosenProd] = useState({
+    name: "",
+    quantity: 0,
+
+  });
+
+  const prodName = document.querySelector(".coffee-name")?.innerHTML;
+  const priceVal = document.querySelector(".price")?.innerHTML.match(/[0-9]/g)?.toString();
   const productQtInput = document.querySelector("#input-quantity") as HTMLInputElement;
 
   let productQt = productQtInput?.value;
-  console.log(productQtInput)
+  //console.log(productQtInput, prodName, priceVal)
 
   function handleDecreaseQt() {
-    if (Number(productQt) > 0) {
-      setQuantity(quantity => quantity - 1);
-      console.log("quantity", quantity);
-    } else {
-      console.log("zero", quantity);
-    }
+    // if (Number(productQt) > 0) {
+    //   setQuantity(quantity => quantity - 1);
+    //   //console.log("quantity", quantity);
+    // } else {
+    //   //console.log("zero", quantity);
+    // }
   }
 
   function handleIncreaseQt() {
     setQuantity(quantity => quantity + 1);
-    console.log("quantity", quantity);
+  }
+  console.log("quantity", quantity);
+
+  // function onChange() {
+  //   return chosenProd.quantity;
+  // }
+
+  function addToCart(event: any) {
+    setChosenProd({
+      name: event.target.id,
+      quantity: quantity
+    });
   }
 
+  console.log(chosenProd);
   return (
     <ShelfStylesContainer>
       <h1>Nossos cafés</h1>
@@ -54,9 +74,9 @@ export function ShelfContainer({ prod }: Props) {
                 <span className="price"><span>R$</span> {product.price}</span>
                 <div className="product-quantity-selector">
                   <button className="decrease" onClick={handleDecreaseQt}>-</button>
-                  <input id="input-quantity" type="number" min="0" max="20" defaultValue={quantity} />
+                  <input id="input-quantity" type="number" min="0" max="20" />
                   <button className="increase" onClick={handleIncreaseQt}>+</button>
-                  <button className="push-to-cart"></button>
+                  <button className="push-to-cart" id={product.name} onClick={addToCart}></button>
                 </div>
               </div>
             </div>
