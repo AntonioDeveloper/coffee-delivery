@@ -2,61 +2,26 @@ import { Product } from "../../../../@types/Products";
 import { ShelfStylesContainer } from "./styles";
 import { HTMLInputTypeAttribute, useState } from "react";
 import { InputProps } from "../../../../../src/@types/ShelfContainerTypes"
+import { InputQuantity } from "../InputQuantity/InputQuantity";
 
 interface Props {
   prod: Product[];
+  decrease: (index: number) => void;
+  increase: (index: number) => void;
+  change: (index: number) => void;
+  addProd: any;
+  quantityProd: number;
 }
 
-export function ShelfContainer({ prod }: Props) {
+export function ShelfContainer({ prod, decrease, increase, change, addProd, quantityProd }: Props) {
 
-  const [quantity, setQuantity] = useState<number>(0);
-
-  const [chosenProd, setChosenProd] = useState({
-    name: "",
-    quantity: 0,
-
-  });
-
-  const prodName = document.querySelector(".coffee-name")?.innerHTML;
-  const priceVal = document.querySelector(".price")?.innerHTML.match(/[0-9]/g)?.toString();
-  const productQtInput = document.querySelector("#input-quantity") as HTMLInputElement;
-
-  let productQt = productQtInput?.value;
-  //console.log(productQtInput, prodName, priceVal)
-
-  function handleDecreaseQt() {
-    // if (Number(productQt) > 0) {
-    //   setQuantity(quantity => quantity - 1);
-    //   //console.log("quantity", quantity);
-    // } else {
-    //   //console.log("zero", quantity);
-    // }
-  }
-
-  function handleIncreaseQt() {
-    setQuantity(quantity => quantity + 1);
-  }
-  console.log("quantity", quantity);
-
-  // function onChange() {
-  //   return chosenProd.quantity;
-  // }
-
-  function addToCart(event: any) {
-    setChosenProd({
-      name: event.target.id,
-      quantity: quantity
-    });
-  }
-
-  console.log(chosenProd);
   return (
     <ShelfStylesContainer>
       <h1>Nossos cafés</h1>
       <div className="product-container">
-        {prod.map(product => {
+        {prod.map((product, index) => {
           return (
-            <div className="coffee-item" key={product.name}>
+            <div className="coffee-item" key={index}>
               <img src={product.image} alt={product.name} />
               <div className="cathegory-container">
                 {
@@ -73,10 +38,10 @@ export function ShelfContainer({ prod }: Props) {
               <div className="prod-card-footer">
                 <span className="price"><span>R$</span> {product.price}</span>
                 <div className="product-quantity-selector">
-                  <button className="decrease" onClick={handleDecreaseQt}>-</button>
-                  <input id="input-quantity" type="number" min="0" max="20" />
-                  <button className="increase" onClick={handleIncreaseQt}>+</button>
-                  <button className="push-to-cart" id={product.name} onClick={addToCart}></button>
+                  <button className="decrease" onClick={e => decrease(index)}>-</button>
+                  <InputQuantity change={e => change(index)} value={quantityProd} />
+                  <button className="increase" onClick={e => increase(index)}>+</button>
+                  <button className="push-to-cart" id={product.name} onClick={addProd}></button>
                 </div>
               </div>
             </div>

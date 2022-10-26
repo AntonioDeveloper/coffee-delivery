@@ -120,26 +120,6 @@ h1 {
           font-weight: bold;
           cursor: pointer;
         }
-
-        #input-quantity {
-          width: 35%;
-          height: 2.38rem;
-          border: none;
-          background-color: ${(props) => props.theme.button};
-          text-align: center;
-  
-          /* Chrome, Safari, Edge, Opera */
-          &::-webkit-outer-spin-button,
-          &::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-          }
-  
-          /* Firefox */
-          &[type=number] {
-            -moz-appearance: textfield;
-          }
-        }
   
         .push-to-cart {
           width: 2.38rem;
