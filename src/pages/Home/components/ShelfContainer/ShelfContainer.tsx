@@ -8,7 +8,7 @@ interface Props {
   prod: Product[];
   decrease: (index: number) => void;
   increase: (index: number) => void;
-  change: (index: number) => void;
+  change: () => void;
   addProd: any;
   quantityProd: number;
 }
@@ -39,7 +39,7 @@ export function ShelfContainer({ prod, decrease, increase, change, addProd, quan
                 <span className="price"><span>R$</span> {product.price}</span>
                 <div className="product-quantity-selector">
                   <button className="decrease" onClick={e => decrease(index)}>-</button>
-                  <InputQuantity change={e => change(index)} value={quantityProd} />
+                  <InputQuantity change={change} value={quantityProd} />
                   <button className="increase" onClick={e => increase(index)}>+</button>
                   <button className="push-to-cart" id={product.name} onClick={addProd}></button>
                 </div>
