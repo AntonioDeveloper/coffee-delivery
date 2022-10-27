@@ -10,10 +10,11 @@ interface Props {
   increase: (index: number) => void;
   change: () => void;
   addProd: any;
-  quantityProd: number;
+  chosenProduct: Product;
+  id: number;
 }
 
-export function ShelfContainer({ prod, decrease, increase, change, addProd, quantityProd }: Props) {
+export function ShelfContainer({ prod, decrease, increase, change, addProd, chosenProduct, id }: Props) {
 
   return (
     <ShelfStylesContainer>
@@ -38,9 +39,9 @@ export function ShelfContainer({ prod, decrease, increase, change, addProd, quan
               <div className="prod-card-footer">
                 <span className="price"><span>R$</span> {product.price}</span>
                 <div className="product-quantity-selector">
-                  <button className="decrease" onClick={e => decrease(index)}>-</button>
-                  <InputQuantity change={change} value={quantityProd} />
-                  <button className="increase" onClick={e => increase(index)}>+</button>
+                  <button className="decrease" onClick={() => decrease(index)}>-</button>
+                  <InputQuantity change={change} value={chosenProduct.quantity} clicado={id} idGeral={product.id} productQuantity={product.quantity} />
+                  <button className="increase" onClick={() => increase(index)}>+</button>
                   <button className="push-to-cart" id={product.name} onClick={addProd}></button>
                 </div>
               </div>

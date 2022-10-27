@@ -17,6 +17,7 @@ export function Home() {
     description: "",
     price: 0.0,
     quantity: 0,
+    image: ""
   });
 
   useEffect(() => {
@@ -42,19 +43,16 @@ export function Home() {
     }
   }
 
+  let findProduct: any;
   function handleIncreaseQt(index: number) {
-    const findProduct: any = products.find(product => {
+    findProduct = products.find(product => {
       if (product.id === index) {
         product.quantity += 1;
         return product;
       }
     });
-    setChosenProd(findProduct);
-
-    console.log(findProduct);
-
+    setChosenProd({ ...findProduct });
   }
-  //console.log("quantity", quantity);
 
   function onChange() {
     return quantity;
@@ -67,12 +65,10 @@ export function Home() {
     // });
   }
 
-  //console.log(products);
-
   return (
     <HomeContainer>
       <Banner />
-      <ShelfContainer prod={products} decrease={handleDecreaseQt} increase={handleIncreaseQt} change={onChange} addProd={addToCart} quantityProd={chosenProd.quantity} />
+      <ShelfContainer prod={products} id={chosenProd.id} chosenProduct={chosenProd} decrease={handleDecreaseQt} increase={handleIncreaseQt} change={onChange} addProd={addToCart} />
     </HomeContainer>
   )
 }
