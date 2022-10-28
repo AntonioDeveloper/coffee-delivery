@@ -1,26 +1,25 @@
 import { Product } from "../../../../@types/Products";
 import { ShelfStylesContainer } from "./styles";
-import { HTMLInputTypeAttribute, useState } from "react";
+import { HTMLInputTypeAttribute, useContext, useState } from "react";
 import { InputProps } from "../../../../../src/@types/ShelfContainerTypes"
 import { InputQuantity } from "../InputQuantity/InputQuantity";
+import { ProductsContext } from "../..";
 
 interface Props {
-  prod: Product[];
   decrease: (index: number) => void;
   increase: (index: number) => void;
   change: () => void;
   addProd: any;
-  chosenProduct: Product;
-  id: number;
 }
 
-export function ShelfContainer({ prod, decrease, increase, change, addProd, chosenProduct, id }: Props) {
+export function ShelfContainer({ decrease, increase, change, addProd }: Props) {
 
+  const { products, chosenProd } = useContext(ProductsContext);
   return (
     <ShelfStylesContainer>
       <h1>Nossos cafés</h1>
       <div className="product-container">
-        {prod.map((product, index) => {
+        {products.map((product, index) => {
           return (
             <div className="coffee-item" key={index}>
               <img src={product.image} alt={product.name} />
@@ -40,7 +39,7 @@ export function ShelfContainer({ prod, decrease, increase, change, addProd, chos
                 <span className="price"><span>R$</span> {product.price}</span>
                 <div className="product-quantity-selector">
                   <button className="decrease" onClick={() => decrease(index)}>-</button>
-                  <InputQuantity change={change} value={chosenProduct.quantity} clicado={id} idGeral={product.id} productQuantity={product.quantity} />
+                  <InputQuantity change={change} value={chosenProd.quantity} clicado={chosenProd.id} idGeral={product.id} productQuantity={product.quantity} />
                   <button className="increase" onClick={() => increase(index)}>+</button>
                   <button className="push-to-cart" id={product.name} onClick={addProd}></button>
                 </div>

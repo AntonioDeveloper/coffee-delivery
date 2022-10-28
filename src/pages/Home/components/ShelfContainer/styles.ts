@@ -126,6 +126,7 @@ h1 {
           height: 2.38rem;
           padding: .5rem;
           margin-left: 4%;
+          cursor: pointer;
   
           background-image: url("../../../../src/assets/cart-white.png");
           background-repeat: no-repeat;

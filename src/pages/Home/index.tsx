@@ -1,14 +1,19 @@
 import { Banner } from "./components/Banner/Banner";
 import { ShelfContainer } from "./components/ShelfContainer/ShelfContainer";
 import { HomeContainer } from "./styles";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import { api } from "../../components/Api";
 import { Product } from "../../@types/Products";
 
+interface ProductsContextType {
+  products: Product[];
+  chosenProd: Product;
+}
+
+export const ProductsContext = createContext({} as ProductsContextType)
+
 export function Home() {
   const [products, setProducts] = useState<Product[]>([]);
-
-  const [quantity, setQuantity] = useState<number>(0);
 
   const [chosenProd, setChosenProd] = useState({
     id: 0,
@@ -36,14 +41,14 @@ export function Home() {
           return product;
         }
       });
-      setChosenProd(findProduct);
-      console.log(findProduct);
+      setChosenProd({ ...findProduct });
     } else {
-      console.log("zero", quantity);
+      return;
     }
   }
 
   let findProduct: any;
+
   function handleIncreaseQt(index: number) {
     findProduct = products.find(product => {
       if (product.id === index) {
@@ -55,7 +60,7 @@ export function Home() {
   }
 
   function onChange() {
-    return quantity;
+    return chosenProd.quantity;
   }
 
   function addToCart(event: any) {
@@ -63,12 +68,15 @@ export function Home() {
     //   name: event.target.id,
     //   quantity: chosenProd.quantity
     // });
+    console.log(chosenProd);
   }
 
   return (
-    <HomeContainer>
-      <Banner />
-      <ShelfContainer prod={products} id={chosenProd.id} chosenProduct={chosenProd} decrease={handleDecreaseQt} increase={handleIncreaseQt} change={onChange} addProd={addToCart} />
-    </HomeContainer>
+    <ProductsContext.Provider value={{ products, chosenProd }}>
+      <HomeContainer>
+        <Banner />
+        <ShelfContainer decrease={handleDecreaseQt} increase={handleIncreaseQt} change={onChange} addProd={addToCart} />
+      </HomeContainer>
+    </ProductsContext.Provider>
   )
 }
