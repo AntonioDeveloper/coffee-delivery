@@ -12,11 +12,12 @@ export const CheckoutStyle = styled.main`
     width: 58%;
     font-family: "Roboto", sans-serif; 
 
-    h1 {
+    h3 {
       font-family: "Baloo 2", sans-serif;
       line-height: 130%;
       font-size: 1.12rem;
       color: ${props => props.theme.subtitle};
+      margin-bottom: .95rem;
     }
 
     .form-container {
@@ -108,12 +109,60 @@ export const CheckoutStyle = styled.main`
       margin-top: 0.75rem;
       border-radius: 6px;
       padding: 2.5rem;
+
+      .headline {
+        display: flex;
+        margin-bottom: 2rem;
+
+        h3 {
+          font-weight: 400;
+          font-size: 1rem;
+          line-height: 130%;
+          color: ${props => props.theme.subtitle};
+        }
+
+        h4 {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 130%;
+          color: ${props => props.theme.subtitle};
+        }
+      }
+
+      .payment-buttons {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+          font-size: 0.75rem;
+          padding: 0.2rem;
+          background-color: ${props => props.theme.button};
+          color: ${props => props.theme.text};
+          border-radius: 6px;
+          border: none;
+          width: 30%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          cursor: pointer;
+
+          &:active {
+            background-color: ${props => props.theme.purpleLight};
+            border: 1px solid ${props => props.theme.purple};
+          }
+        }
+      }
     }
   }
 
   .minicart-side {
     width: 38%;
 
+    h3 {
+      font-family: "Baloo 2", sans-serif; 
+      margin-bottom: .95rem;
+    }
     .summary-container {
       width: 100%;
       height: 31rem;
@@ -121,7 +170,17 @@ export const CheckoutStyle = styled.main`
       padding: 2.5rem;
       border-radius: 6px 44px;
   
-      "Roboto", sans 
+      font-family: "Roboto", sans-serif; 
+    }
+
+    .order-confirm {
+      width: 100%;
+      padding: .75rem .5rem;
+      background-color: ${props => props.theme.yellow};
+      color: ${props => props.theme.white};
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
     }
   }
 `	

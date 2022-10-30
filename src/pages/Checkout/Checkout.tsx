@@ -4,12 +4,21 @@ import imgDolar from "../../assets/dolar-icon.png"
 import imgCreditCard from "../../assets/credit-card.png"
 import imgDebitCard from "../../assets/debit-card.png"
 import imgMoney from "../../assets/money.png"
+import { useContext } from "react"
+import { OrdersContext } from "../../context/OrdersContext"
 
 export function Checkout() {
+  const { listCart } = useContext(OrdersContext);
+
+  console.log(listCart);
+
   return (
     <CheckoutStyle>
+      <pre>
+        {JSON.stringify(listCart)}
+      </pre>
       <section className="form-side">
-        <h1>Complete seu pedido</h1>
+        <h3>Complete seu pedido</h3>
         <div className="form-container">
           <div className="headline">
             <div>
@@ -40,18 +49,20 @@ export function Checkout() {
               <h4>O pagamento é feito na entrega. Escolha a forma que deseja pagar</h4>
             </div>
           </div>
-          <button type="button" className="credit-card-btn">
-            <img src={imgCreditCard} alt="" />
-            <span>CARTÃO DE CRÉDITO</span>
-          </button>
-          <button type="button" className="debit-card-btn">
-            <img src={imgDebitCard} alt="" />
-            <span>CARTÃO DE DÉBITO</span>
-          </button>
-          <button type="button" className="money-btn">
-            <img src={imgMoney} alt="" />
-            <span>Dinheiro</span>
-          </button>
+          <div className="payment-buttons">
+            <button type="button" className="credit-card-btn">
+              <img src={imgCreditCard} alt="" />
+              <span>CARTÃO DE CRÉDITO</span>
+            </button>
+            <button type="button" className="debit-card-btn">
+              <img src={imgDebitCard} alt="" />
+              <span>CARTÃO DE DÉBITO</span>
+            </button>
+            <button type="button" className="money-btn">
+              <img src={imgMoney} alt="" />
+              <span>DINHEIRO</span>
+            </button>
+          </div>
         </div>
       </section>
       <section className="minicart-side">

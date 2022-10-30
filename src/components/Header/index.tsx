@@ -12,9 +12,9 @@ export function Header() {
           <img src={point} alt="" />
           <span>São Paulo, SP</span>
         </div>
-        <button className="btn-cart">
+        <a href="/checkout" className="btn-cart">
           <img src={cart} alt="" />
-        </button>
+        </a>
       </div>
     </HeaderContainer>
   )
