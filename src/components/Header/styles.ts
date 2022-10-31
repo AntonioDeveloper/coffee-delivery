@@ -49,8 +49,11 @@ img {
     background-color: ${props => props.theme.yellowLight};
     border-radius: 6px;
     border: none;
-    
     cursor: pointer;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     img {
       width: 1.16rem;

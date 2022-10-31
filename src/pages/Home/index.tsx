@@ -14,19 +14,6 @@ interface ProductsContextType {
 export const ProductsContext = createContext({} as ProductsContextType)
 
 export function Home() {
-  const { products, addToCart, chosenProd, handleDecreaseQt, handleIncreaseQt, onChange } = useContext(OrdersContext);
-
-  //const [products, setProducts] = useState<Product[]>([]);
-
-
-
-  // const [listProds, setListProds] = useState<Product[]>([]);
-  // let cartContent: Product[] = [];
-
-
-
-
-
   return (
     <HomeContainer>
       <Banner />

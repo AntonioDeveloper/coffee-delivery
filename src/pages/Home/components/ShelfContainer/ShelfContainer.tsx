@@ -10,8 +10,6 @@ export function ShelfContainer() {
 
   const { products, chosenProd, handleDecreaseQt, handleIncreaseQt, onChange, addToCart, listCart } = useContext(OrdersContext);
 
-  //console.log(listCart)
-
   return (
     <ShelfStylesContainer>
       <h1>Nossos cafés</h1>

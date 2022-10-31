@@ -6,17 +6,16 @@ import imgDebitCard from "../../assets/debit-card.png"
 import imgMoney from "../../assets/money.png"
 import { useContext } from "react"
 import { OrdersContext } from "../../context/OrdersContext"
+import { InputQuantity } from "../Home/components/InputQuantity/InputQuantity"
 
 export function Checkout() {
-  const { listCart } = useContext(OrdersContext);
+  const { listCart, handleDecreaseQt, onChange, handleIncreaseQt, addToCart } = useContext(OrdersContext);
 
-  console.log(listCart);
+  let index = 0;
 
   return (
     <CheckoutStyle>
-      <pre>
-        {JSON.stringify(listCart)}
-      </pre>
+
       <section className="form-side">
         <h3>Complete seu pedido</h3>
         <div className="form-container">
@@ -69,19 +68,37 @@ export function Checkout() {
         <h3>Cafés selecionados</h3>
         <div className="summary-container">
           <div className="selected-prods"></div>
+          {listCart.map(item => {
+            return (
+              <div className="prod-cart" key={item.id}>
+                <img src={item.image} alt={item.name} />
+                <div className="prod-quantity">
+                  <p>{item.name}</p>
+                  <div className="product-quantity-selector">
+                    <button className="decrease" onClick={() => handleDecreaseQt(index = item.id)}>-</button>
+                    <InputQuantity change={onChange} value={item.quantity} clicado={item.id} idGeral={item.id} productQuantity={item.quantity} />
+                    <button className="increase" onClick={() => handleIncreaseQt(index = item.id)}>+</button>
+                    <button className="push-to-cart" id={item.name} onClick={() => addToCart(index = item.id)}></button>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
           <table className="order-summary">
-            <tr className="total-items">
-              <td>Total de itens</td>
-              <td>R$</td>
-            </tr>
-            <tr className="total-items">
-              <td>Entrega</td>
-              <td>R$</td>
-            </tr>
-            <tr className="total-items">
-              <td>Total</td>
-              <td>R$</td>
-            </tr>
+            <tbody>
+              <tr className="total-items">
+                <td>Total de itens</td>
+                <td>R$</td>
+              </tr>
+              <tr className="total-items">
+                <td>Entrega</td>
+                <td>R$</td>
+              </tr>
+              <tr className="total-items">
+                <td>Total</td>
+                <td>R$</td>
+              </tr>
+            </tbody>
           </table>
           <button type="button" className="order-confirm">
             CONFIRMAR PEDIDO

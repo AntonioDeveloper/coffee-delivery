@@ -18,11 +18,10 @@ interface OrdersContextProviderProps {
 }
 
 export const OrdersContext = createContext({} as OrdersContextType);
-let listCart: Product[] = [];
-
 
 export function OrdersContextProvider({ children }: OrdersContextProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
+  const [listCart, setListCart] = useState<Product[]>([]);
 
   useEffect(() => {
     api.get("/products")
@@ -39,8 +38,10 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
         return prod;
       }
     })
+
     listCart.push(foundProduct);
 
+    setListCart(listCart);
     console.log(listCart);
   }
 
@@ -63,6 +64,7 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
         }
       });
       setChosenProd({ ...findProduct });
+      return listCart;
     } else {
       return;
     }
