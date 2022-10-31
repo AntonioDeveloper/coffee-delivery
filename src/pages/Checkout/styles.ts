@@ -166,21 +166,108 @@ export const CheckoutStyle = styled.main`
     .summary-container {
       width: 100%;
       height: 31rem;
+      position: relative;
       background-color: ${props => props.theme.card};
       padding: 2.5rem;
       border-radius: 6px 44px;
   
       font-family: "Roboto", sans-serif; 
+
+      .selected-prods {
+        max-height: 16rem;
+        overflow-y: auto;
+
+        .prod-cart {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+  
+          img {
+            width: 22%;
+            height: 22%;
+          }
+  
+          .prod-quantity {
+            font-size: 1rem;
+            width: 75%;
+  
+            span {
+              font-size: .9rem;
+  
+              &:first-child {
+                margin-right: .6rem;
+              }
+            }
+          }
+  
+          .product-quantity-selector {
+            display: flex;
+            width: 100%;
+            margin: .5rem 0;
+  
+            .inputs-quantity {
+              width: 48%;
+              display: flex;
+            }
+  
+            #input-quantity {
+              background-color: ${props => props.theme.button};
+              width: 1.5rem;
+              padding: 0 .5rem;
+            }
+  
+            .decrease, .increase {
+              border: 0;
+              background-color: ${props => props.theme.button};
+              width: 1.5rem;
+              padding: 0 .5rem;
+              cursor: pointer;
+            }
+  
+            .decrease {
+              border-radius: 6px 0  0 6px;
+            }
+  
+            .increase {
+              border-radius: 0 6px  6px 0;
+            }
+  
+            .remove-from-cart {
+              border: 0;
+              background-color: ${props => props.theme.button};
+              color: ${props => props.theme.text};
+              font-size: .8rem;
+              padding: 0 .5rem;
+              border-radius: 6px;
+              cursor: pointer;
+  
+              display: flex;
+              align-items: center;
+  
+              img {
+                width: 1rem;
+                height: 1rem;
+              }
+            }
+          }
+        }
+      }
     }
 
-    .order-confirm {
-      width: 100%;
-      padding: .75rem .5rem;
-      background-color: ${props => props.theme.yellow};
-      color: ${props => props.theme.white};
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
+    .order-summary {
+      width: 75%;
+      position: absolute;
+      bottom: 40px;
+
+      .order-confirm {
+        width: 100%;
+        padding: .75rem .5rem;
+        background-color: ${props => props.theme.yellow};
+        color: ${props => props.theme.white};
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+      }
     }
   }
 `	
