@@ -177,10 +177,24 @@ export const CheckoutStyle = styled.main`
         max-height: 16rem;
         overflow-y: auto;
 
+        &::-webkit-scrollbar {
+          width: .4rem;
+        }
+
+        &::-webkit-scrollbar-track {
+          -webkit-box-shadow: inset 0 0 6px ${props => props.theme.background};
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: ${props => props.theme.button};
+        }
+
         .prod-cart {
           display: flex;
           justify-content: space-between;
-          width: 100%;
+          width: 96%;
+          padding: 1.5rem 0;
+          border-bottom: 1px solid #E6E5E5;
   
           img {
             width: 22%;
@@ -193,9 +207,14 @@ export const CheckoutStyle = styled.main`
   
             span {
               font-size: .9rem;
+              line-height: 130%;
   
               &:first-child {
                 margin-right: .6rem;
+              }
+
+              &:nth-child(2) {
+                display: block;
               }
             }
           }
@@ -259,9 +278,14 @@ export const CheckoutStyle = styled.main`
       position: absolute;
       bottom: 40px;
 
+      .total-items {
+        line-height: 21px;
+      }
+
       .order-confirm {
         width: 100%;
         padding: .75rem .5rem;
+        margin-top: 1.5rem;
         background-color: ${props => props.theme.yellow};
         color: ${props => props.theme.white};
         border-radius: 6px;

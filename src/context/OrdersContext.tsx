@@ -7,6 +7,7 @@ interface OrdersContextType {
   listCart: Product[];
   products: Product[];
   addToCart: (index: number) => void;
+  removeFromCart: (index: number) => void;
   chosenProd: Product;
   handleDecreaseQt: (index: number) => void;
   handleIncreaseQt: (index: number) => void;
@@ -40,9 +41,33 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
     })
 
     listCart.push(foundProduct);
+    setListCart(listCart);
+  }
 
+  function removeFromCart(index: number) {
+
+    const foundProduct: any = products.find(prod => {
+      if (prod.id === index) {
+        return prod;
+      }
+    })
+
+    listCart.splice(foundProduct.id, 1);
     setListCart(listCart);
     console.log(listCart);
+
+    let el = document.querySelector(`div.prod-cart:nth-child(${foundProduct.id})`);
+    if (el === null) {
+      el = document.querySelector(`div.prod-cart:first-child`);
+      el?.remove();
+      console.log(el, foundProduct.id);
+    } else {
+      el = document.querySelector(`div.prod-cart:nth-child(${foundProduct.id})`);
+      el?.remove();
+      console.log(el, foundProduct.id);
+    }
+
+    console.log(foundProduct.id);
   }
 
   const [chosenProd, setChosenProd] = useState({
@@ -87,7 +112,7 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
   }
 
   return (
-    <OrdersContext.Provider value={{ listCart, products, addToCart, chosenProd, handleDecreaseQt, handleIncreaseQt, onChange }}>
+    <OrdersContext.Provider value={{ listCart, products, addToCart, removeFromCart, chosenProd, handleDecreaseQt, handleIncreaseQt, onChange }}>
       {children}
     </OrdersContext.Provider>
   )

@@ -4,22 +4,18 @@ import imgDolar from "../../assets/dolar-icon.png"
 import imgCreditCard from "../../assets/credit-card.png"
 import imgDebitCard from "../../assets/debit-card.png"
 import imgMoney from "../../assets/money.png"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { OrdersContext } from "../../context/OrdersContext"
 import { InputQuantity } from "../Home/components/InputQuantity/InputQuantity"
 import imgTrashCan from '../../assets/trash-can.png'
 
 export function Checkout() {
-  const { listCart, handleDecreaseQt, onChange, handleIncreaseQt, addToCart, chosenProd } = useContext(OrdersContext);
+  const { listCart, handleDecreaseQt, onChange, handleIncreaseQt, removeFromCart } = useContext(OrdersContext);
 
   let index;
   const initialValue = 0;
-  let total = listCart.reduce((prev, curr) => prev + curr.price, initialValue);
-
-  useEffect(() => {
-    total = total + (chosenProd.price * chosenProd.quantity);
-    console.log(total);
-  }, [chosenProd]);
+  let delivery = 5.00;
+  let total = listCart.reduce((prev, curr) => prev + (curr.quantity * curr.price), initialValue) + delivery;
 
   return (
     <CheckoutStyle>
@@ -88,7 +84,7 @@ export function Checkout() {
                         <InputQuantity change={onChange} value={item.quantity} clicado={item.id} idGeral={item.id} productQuantity={item.quantity} />
                         <button className="increase" onClick={() => handleIncreaseQt(index = item.id)}>+</button>
                       </div>
-                      <button className="remove-from-cart" id={item.name} onClick={() => addToCart(index = item.id)}>
+                      <button className="remove-from-cart" id={item.name} onClick={() => removeFromCart(index = item.id)}>
                         <img src={imgTrashCan} alt="" />
                         REMOVER
                       </button>
@@ -119,12 +115,12 @@ export function Checkout() {
                 <td>
                   R$
                   {
-                    total
+                    total.toFixed(2)
                   }
                 </td>
               </tr>
               <tr className="order-confirm-holder">
-                <td>
+                <td colSpan={2}>
                   <button type="button" className="order-confirm">
                     CONFIRMAR PEDIDO
                   </button>
