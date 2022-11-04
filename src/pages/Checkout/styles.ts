@@ -291,6 +291,10 @@ export const CheckoutStyle = styled.main`
         border-radius: 6px;
         border: none;
         cursor: pointer;
+
+        &[disabled] {
+          cursor: not-allowed;
+        }
       }
     }
   }

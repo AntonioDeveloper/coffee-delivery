@@ -8,14 +8,42 @@ import { useContext, useEffect, useState } from "react"
 import { OrdersContext } from "../../context/OrdersContext"
 import { InputQuantity } from "../Home/components/InputQuantity/InputQuantity"
 import imgTrashCan from '../../assets/trash-can.png'
+import { Orders } from "../../@types/Orders"
 
 export function Checkout() {
   const { listCart, handleDecreaseQt, onChange, handleIncreaseQt, removeFromCart } = useContext(OrdersContext);
+
+  const [orderFilled, setOrderFilled] = useState<Orders>({
+    listCart: [],
+    cep: "",
+    rua: '',
+    numero: '',
+    complemento: '',
+    bairro: '',
+    cidade: '',
+    uf: ''
+  })
 
   let index;
   const initialValue = 0;
   let delivery = 5.00;
   let total = listCart.reduce((prev, curr) => prev + (curr.quantity * curr.price), initialValue) + delivery;
+
+  function handleOrderForm(e: any) {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setOrderFilled({
+      ...orderFilled, listCart: listCart, [e.target.name]: e.target.value
+    });
+
+    console.log(orderFilled);
+  }
+
+  function handleSubmitOrder(e: any) {
+    e.preventDefault();
+    alert(JSON.stringify(orderFilled));
+  }
 
   return (
     <CheckoutStyle>
@@ -32,13 +60,13 @@ export function Checkout() {
             </div>
           </div>
           <form action="" >
-            <input type="number" placeholder="CEP" required />
-            <input type="text" placeholder="Rua" required />
-            <input type="number" placeholder="Número" required />
-            <input type="text" placeholder="Complemento" />
-            <input type="text" placeholder="Bairro" />
-            <input type="text" placeholder="Cidade" />
-            <input type="text" placeholder="UF" maxLength={2} />
+            <input type="number" name="cep" placeholder="CEP" required minLength={9} maxLength={9} value={orderFilled.cep} onChange={(e) => handleOrderForm(e)} />
+            <input type="text" placeholder="Rua" name="rua" required maxLength={100} value={orderFilled.rua} onChange={(e) => handleOrderForm(e)} />
+            <input type="number" placeholder="Número" name="numero" required minLength={1} value={orderFilled.numero} maxLength={5} onChange={(e) => handleOrderForm(e)} />
+            <input type="text" placeholder="Complemento" name="complemento" maxLength={50} value={orderFilled.complemento} onChange={(e) => handleOrderForm(e)} />
+            <input type="text" placeholder="Bairro" name="bairro" required maxLength={50} value={orderFilled.bairro} onChange={(e) => handleOrderForm(e)} />
+            <input type="text" placeholder="Cidade" name="cidade" required maxLength={50} value={orderFilled.cidade} onChange={(e) => handleOrderForm(e)} />
+            <input type="text" placeholder="UF" name="uf" required minLength={2} maxLength={2} value={orderFilled.uf} onChange={(e) => handleOrderForm(e)} />
           </form>
         </div>
         <div className="payment-ways">
@@ -121,7 +149,9 @@ export function Checkout() {
               </tr>
               <tr className="order-confirm-holder">
                 <td colSpan={2}>
-                  <button type="button" className="order-confirm">
+                  <button type="button" className="order-confirm"
+                    onClick={(e) => handleSubmitOrder(e)}
+                  >
                     CONFIRMAR PEDIDO
                   </button>
                 </td>
