@@ -24,26 +24,38 @@ export function Checkout() {
     uf: ''
   })
 
+  let [orderConfirmBtnSwitch, setOrderConfirmBtnSwitch] = useState(true);
+
   let index;
   const initialValue = 0;
   let delivery = 5.00;
   let total = listCart.reduce((prev, curr) => prev + (curr.quantity * curr.price), initialValue) + delivery;
 
   function handleOrderForm(e: any) {
-    const name = e.target.name;
-    const value = e.target.value;
-
+    console.log(e.target.value === true ? 'Order ok' : 'Order nok');
     setOrderFilled({
       ...orderFilled, listCart: listCart, [e.target.name]: e.target.value
     });
 
-    console.log(orderFilled);
+    orderFilled.cep.length === 8 && orderFilled.rua.length > 0 && orderFilled.numero.length > 0 && orderFilled.bairro.length > 0 && orderFilled.cidade.length > 0 && orderFilled.uf.length > 0 ? (setOrderConfirmBtnSwitch(false), console.log('certo', orderConfirmBtnSwitch)) : (setOrderConfirmBtnSwitch(true), console.log('errado', orderConfirmBtnSwitch));
   }
 
+  useEffect(() => {
+    console.log(orderFilled);
+  }, [orderFilled]);
+
   function handleSubmitOrder(e: any) {
+
     e.preventDefault();
-    alert(JSON.stringify(orderFilled));
+
+    const closedOrder = orderFilled;
+
+    alert(JSON.stringify(closedOrder));
   }
+
+  useEffect(() => {
+    orderConfirmBtnSwitch = !true
+  }, [orderConfirmBtnSwitch])
 
   return (
     <CheckoutStyle>
@@ -60,13 +72,13 @@ export function Checkout() {
             </div>
           </div>
           <form action="" >
-            <input type="number" name="cep" placeholder="CEP" required minLength={9} maxLength={9} value={orderFilled.cep} onChange={(e) => handleOrderForm(e)} />
-            <input type="text" placeholder="Rua" name="rua" required maxLength={100} value={orderFilled.rua} onChange={(e) => handleOrderForm(e)} />
-            <input type="number" placeholder="Número" name="numero" required minLength={1} value={orderFilled.numero} maxLength={5} onChange={(e) => handleOrderForm(e)} />
-            <input type="text" placeholder="Complemento" name="complemento" maxLength={50} value={orderFilled.complemento} onChange={(e) => handleOrderForm(e)} />
-            <input type="text" placeholder="Bairro" name="bairro" required maxLength={50} value={orderFilled.bairro} onChange={(e) => handleOrderForm(e)} />
-            <input type="text" placeholder="Cidade" name="cidade" required maxLength={50} value={orderFilled.cidade} onChange={(e) => handleOrderForm(e)} />
-            <input type="text" placeholder="UF" name="uf" required minLength={2} maxLength={2} value={orderFilled.uf} onChange={(e) => handleOrderForm(e)} />
+            <input type="number" name="cep" placeholder="CEP" value={orderFilled.cep} onChange={(e) => handleOrderForm(e)} />
+            <input type="text" placeholder="Rua" name="rua" value={orderFilled.rua} onChange={(e) => handleOrderForm(e)} />
+            <input type="number" placeholder="Número" name="numero" value={orderFilled.numero} onChange={(e) => handleOrderForm(e)} />
+            <input type="text" placeholder="Complemento" name="complemento" value={orderFilled.complemento} onChange={(e) => handleOrderForm(e)} />
+            <input type="text" placeholder="Bairro" name="bairro" value={orderFilled.bairro} onChange={(e) => handleOrderForm(e)} />
+            <input type="text" placeholder="Cidade" name="cidade" value={orderFilled.cidade} onChange={(e) => handleOrderForm(e)} />
+            <input type="text" placeholder="UF" name="uf" value={orderFilled.uf} onChange={(e) => handleOrderForm(e)} />
           </form>
         </div>
         <div className="payment-ways">
@@ -151,6 +163,7 @@ export function Checkout() {
                 <td colSpan={2}>
                   <button type="button" className="order-confirm"
                     onClick={(e) => handleSubmitOrder(e)}
+                    disabled={orderConfirmBtnSwitch}
                   >
                     CONFIRMAR PEDIDO
                   </button>
