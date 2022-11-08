@@ -21,10 +21,15 @@ export function Checkout() {
     complemento: '',
     bairro: '',
     cidade: '',
-    uf: ''
+    uf: '',
+    totalItems: 0,
+    valorEntrega: 0.00,
+    totalPedido: 0.00,
   })
 
   let [orderConfirmBtnSwitch, setOrderConfirmBtnSwitch] = useState(true);
+
+  let [paymentBtnSwitch, setPaymentBtnSwitch] = useState("");
 
   let index;
   const initialValue = 0;
@@ -33,8 +38,11 @@ export function Checkout() {
 
   function handleOrderForm(e: any) {
     console.log(e.target.value === true ? 'Order ok' : 'Order nok');
+    orderFilled.totalItems = listCart.length;
+    orderFilled.valorEntrega = 5.00;
+    orderFilled.totalPedido = total;
     setOrderFilled({
-      ...orderFilled, listCart: listCart, [e.target.name]: e.target.value
+      ...orderFilled, listCart: listCart, [e.target.name]: e.target.value,
     });
 
     orderFilled.cep.length === 8 && orderFilled.rua.length > 0 && orderFilled.numero.length > 0 && orderFilled.bairro.length > 0 && orderFilled.cidade.length > 0 && orderFilled.uf.length > 0 ? (setOrderConfirmBtnSwitch(false), console.log('certo', orderConfirmBtnSwitch)) : (setOrderConfirmBtnSwitch(true), console.log('errado', orderConfirmBtnSwitch));
@@ -50,12 +58,30 @@ export function Checkout() {
 
     const closedOrder = orderFilled;
 
-    alert(JSON.stringify(closedOrder));
+    console.log(JSON.stringify(closedOrder));
+
+    window.location.href = "/success-page"
   }
 
   useEffect(() => {
     orderConfirmBtnSwitch = !true
   }, [orderConfirmBtnSwitch])
+
+  let btnClicked: any;
+
+  function paymentBtnClick(e: any) {
+    e.preventDefault();
+    paymentBtnSwitch = e.target.id;
+    setPaymentBtnSwitch(paymentBtnSwitch);
+    btnClicked = document.getElementById(`${e.target.id}`);
+    btnClicked?.classList.add("selected");
+
+  }
+
+  useEffect(() => {
+    console.log(btnClicked);
+    console.log(paymentBtnSwitch)
+  }, [paymentBtnSwitch])
 
   return (
     <CheckoutStyle>
@@ -92,15 +118,24 @@ export function Checkout() {
             </div>
           </div>
           <div className="payment-buttons">
-            <button type="button" className="credit-card-btn">
+            <button type="button"
+              id="credit-card-btn"
+              onClick={(e) => paymentBtnClick(e)}
+            >
               <img src={imgCreditCard} alt="" />
               <span>CARTÃO DE CRÉDITO</span>
             </button>
-            <button type="button" className="debit-card-btn">
+            <button type="button"
+              id="debit-card-btn"
+              onClick={(e) => paymentBtnClick(e)}
+            >
               <img src={imgDebitCard} alt="" />
               <span>CARTÃO DE DÉBITO</span>
             </button>
-            <button type="button" className="money-btn">
+            <button type="button"
+              id="money-btn"
+              onClick={(e) => paymentBtnClick(e)}
+            >
               <img src={imgMoney} alt="" />
               <span>DINHEIRO</span>
             </button>

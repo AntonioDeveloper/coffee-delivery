@@ -146,11 +146,10 @@ export const CheckoutStyle = styled.main`
           flex-direction: column;
           align-items: center;
           cursor: pointer;
-
-          &:active {
-            background-color: ${props => props.theme.purpleLight};
-            border: 1px solid ${props => props.theme.purple};
-          }
+        }
+        .selected {
+          background-color: ${props => props.theme.purpleLight} !important;
+          border: 1px solid ${props => props.theme.purple};
         }
       }
     }

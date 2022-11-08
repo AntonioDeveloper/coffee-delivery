@@ -9,4 +9,7 @@ export interface Orders {
   bairro: string;
   cidade: string;
   uf: string;
+  totalItems: number;
+  valorEntrega: number;
+  totalPedido: number;
 }
