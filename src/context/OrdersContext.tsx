@@ -2,16 +2,24 @@ import { createContext, ReactNode } from 'react';
 import { Product } from "../@types/Products";
 import { api } from "../components/Api";
 import { useState, useEffect } from 'react';
+import { Orders } from '../@types/Orders';
 
 interface OrdersContextType {
   listCart: Product[];
   products: Product[];
+  orderFilled: Orders;
+  orderConfirmBtnSwitch: boolean;
+  delivery: number;
+  total: number;
   addToCart: (index: number) => void;
   removeFromCart: (index: number) => void;
   chosenProd: Product;
   handleDecreaseQt: (index: number) => void;
   handleIncreaseQt: (index: number) => void;
   onChange: () => void;
+  handleOrderForm: (e: any) => void;
+  handleSubmitOrder: (e: any) => void;
+  paymentBtnClick: (e: any) => void;
 }
 
 interface OrdersContextProviderProps {
@@ -23,6 +31,78 @@ export const OrdersContext = createContext({} as OrdersContextType);
 export function OrdersContextProvider({ children }: OrdersContextProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [listCart, setListCart] = useState<Product[]>([]);
+
+  const [orderFilled, setOrderFilled] = useState<Orders>({
+    listCart: [],
+    cep: "",
+    rua: '',
+    numero: '',
+    complemento: '',
+    bairro: '',
+    cidade: '',
+    uf: '',
+    totalItems: 0,
+    valorEntrega: 0.00,
+    totalPedido: 0.00,
+  })
+
+  let [orderConfirmBtnSwitch, setOrderConfirmBtnSwitch] = useState(true);
+
+  let [paymentBtnSwitch, setPaymentBtnSwitch] = useState("");
+
+  const initialValue = 0;
+  let delivery = 5.00;
+  let total = listCart.reduce((prev, curr) => prev + (curr.quantity * curr.price), initialValue) + delivery;
+
+  function handleOrderForm(e: any) {
+    console.log(e.target.value === true ? 'Order ok' : 'Order nok');
+    orderFilled.totalItems = listCart.length;
+    orderFilled.valorEntrega = 5.00;
+    orderFilled.totalPedido = total;
+    setOrderFilled({
+      ...orderFilled, listCart: listCart, [e.target.name]: e.target.value,
+    });
+
+    orderFilled.cep.length === 8 && orderFilled.rua.length > 0 && orderFilled.numero.length > 0 && orderFilled.bairro.length > 0 && orderFilled.cidade.length > 0 && orderFilled.uf.length > 0 ? (setOrderConfirmBtnSwitch(false), console.log('certo', orderConfirmBtnSwitch)) : (setOrderConfirmBtnSwitch(true), console.log('errado', orderConfirmBtnSwitch));
+  }
+
+  useEffect(() => {
+    console.log(orderFilled);
+  }, [orderFilled]);
+
+  function handleSubmitOrder(e: any) {
+
+    e.preventDefault();
+
+    const closedOrder = orderFilled;
+
+    console.log(JSON.stringify(closedOrder));
+
+    window.location.href = "/success-page"
+  }
+
+  const linkCloseCart = document.querySelector(".btn-closeCart")
+  useEffect(() => {
+    orderConfirmBtnSwitch = !true
+    linkCloseCart?.classList.remove("disabled");
+    linkCloseCart?.classList.add("enabled");
+  }, [orderConfirmBtnSwitch])
+
+  let btnClicked: any;
+
+  function paymentBtnClick(e: any) {
+    e.preventDefault();
+    paymentBtnSwitch = e.target.id;
+    setPaymentBtnSwitch(paymentBtnSwitch);
+    btnClicked = document.getElementById(`${e.target.id}`);
+    btnClicked?.classList.add("selected");
+
+  }
+
+  useEffect(() => {
+    console.log(btnClicked);
+    console.log(paymentBtnSwitch)
+  }, [paymentBtnSwitch])
 
   useEffect(() => {
     api.get("/products")
@@ -112,7 +192,7 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
   }
 
   return (
-    <OrdersContext.Provider value={{ listCart, products, addToCart, removeFromCart, chosenProd, handleDecreaseQt, handleIncreaseQt, onChange }}>
+    <OrdersContext.Provider value={{ listCart, products, addToCart, removeFromCart, chosenProd, handleDecreaseQt, handleIncreaseQt, onChange, orderFilled, orderConfirmBtnSwitch, delivery, total, handleOrderForm, handleSubmitOrder, paymentBtnClick }}>
       {children}
     </OrdersContext.Provider>
   )

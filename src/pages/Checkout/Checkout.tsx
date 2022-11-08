@@ -4,84 +4,14 @@ import imgDolar from "../../assets/dolar-icon.png"
 import imgCreditCard from "../../assets/credit-card.png"
 import imgDebitCard from "../../assets/debit-card.png"
 import imgMoney from "../../assets/money.png"
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import { OrdersContext } from "../../context/OrdersContext"
 import { InputQuantity } from "../Home/components/InputQuantity/InputQuantity"
 import imgTrashCan from '../../assets/trash-can.png'
-import { Orders } from "../../@types/Orders"
+import { NavLink } from "react-router-dom"
 
 export function Checkout() {
-  const { listCart, handleDecreaseQt, onChange, handleIncreaseQt, removeFromCart } = useContext(OrdersContext);
-
-  const [orderFilled, setOrderFilled] = useState<Orders>({
-    listCart: [],
-    cep: "",
-    rua: '',
-    numero: '',
-    complemento: '',
-    bairro: '',
-    cidade: '',
-    uf: '',
-    totalItems: 0,
-    valorEntrega: 0.00,
-    totalPedido: 0.00,
-  })
-
-  let [orderConfirmBtnSwitch, setOrderConfirmBtnSwitch] = useState(true);
-
-  let [paymentBtnSwitch, setPaymentBtnSwitch] = useState("");
-
-  let index;
-  const initialValue = 0;
-  let delivery = 5.00;
-  let total = listCart.reduce((prev, curr) => prev + (curr.quantity * curr.price), initialValue) + delivery;
-
-  function handleOrderForm(e: any) {
-    console.log(e.target.value === true ? 'Order ok' : 'Order nok');
-    orderFilled.totalItems = listCart.length;
-    orderFilled.valorEntrega = 5.00;
-    orderFilled.totalPedido = total;
-    setOrderFilled({
-      ...orderFilled, listCart: listCart, [e.target.name]: e.target.value,
-    });
-
-    orderFilled.cep.length === 8 && orderFilled.rua.length > 0 && orderFilled.numero.length > 0 && orderFilled.bairro.length > 0 && orderFilled.cidade.length > 0 && orderFilled.uf.length > 0 ? (setOrderConfirmBtnSwitch(false), console.log('certo', orderConfirmBtnSwitch)) : (setOrderConfirmBtnSwitch(true), console.log('errado', orderConfirmBtnSwitch));
-  }
-
-  useEffect(() => {
-    console.log(orderFilled);
-  }, [orderFilled]);
-
-  function handleSubmitOrder(e: any) {
-
-    e.preventDefault();
-
-    const closedOrder = orderFilled;
-
-    console.log(JSON.stringify(closedOrder));
-
-    window.location.href = "/success-page"
-  }
-
-  useEffect(() => {
-    orderConfirmBtnSwitch = !true
-  }, [orderConfirmBtnSwitch])
-
-  let btnClicked: any;
-
-  function paymentBtnClick(e: any) {
-    e.preventDefault();
-    paymentBtnSwitch = e.target.id;
-    setPaymentBtnSwitch(paymentBtnSwitch);
-    btnClicked = document.getElementById(`${e.target.id}`);
-    btnClicked?.classList.add("selected");
-
-  }
-
-  useEffect(() => {
-    console.log(btnClicked);
-    console.log(paymentBtnSwitch)
-  }, [paymentBtnSwitch])
+  const { listCart, removeFromCart, handleDecreaseQt, handleIncreaseQt, onChange, orderFilled, orderConfirmBtnSwitch, total, handleOrderForm, handleSubmitOrder, paymentBtnClick } = useContext(OrdersContext);
 
   return (
     <CheckoutStyle>
@@ -146,7 +76,7 @@ export function Checkout() {
         <h3>Cafés selecionados</h3>
         <div className="summary-container">
           <div className="selected-prods">
-            {listCart.map(item => {
+            {listCart.map((item, index) => {
               return (
                 <div className="prod-cart" key={item.id}>
                   <img src={item.image} alt={item.name} />
@@ -196,12 +126,19 @@ export function Checkout() {
               </tr>
               <tr className="order-confirm-holder">
                 <td colSpan={2}>
-                  <button type="button" className="order-confirm"
+                  {/* <button type="button" className="order-confirm"
                     onClick={(e) => handleSubmitOrder(e)}
                     disabled={orderConfirmBtnSwitch}
                   >
                     CONFIRMAR PEDIDO
-                  </button>
+                  </button> */}
+                  <NavLink to={{
+                    pathname: '/success-page'
+                  }}
+                    className="btn-closeCart disabled"
+                  >
+                    FINALIZAR
+                  </NavLink>
                 </td>
               </tr>
             </tbody>

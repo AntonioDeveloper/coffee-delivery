@@ -295,6 +295,18 @@ export const CheckoutStyle = styled.main`
           cursor: not-allowed;
         }
       }
+
+      .btn-closeCart {
+
+        &.disabled {
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+      }
+
+      .enabled {
+        cursor: pointer;
+      }
     }
   }
 `	
