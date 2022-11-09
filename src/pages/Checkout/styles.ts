@@ -281,7 +281,7 @@ export const CheckoutStyle = styled.main`
         line-height: 21px;
       }
 
-      .order-confirm {
+      .btn-closeCart {
         width: 100%;
         padding: .75rem .5rem;
         margin-top: 1.5rem;
@@ -289,23 +289,20 @@ export const CheckoutStyle = styled.main`
         color: ${props => props.theme.white};
         border-radius: 6px;
         border: none;
-        cursor: pointer;
-
-        &[disabled] {
-          cursor: not-allowed;
-        }
-      }
-
-      .btn-closeCart {
+        display: block;
+        text-decoration: none;
+        text-align: center;
 
         &.disabled {
-          cursor: not-allowed;
+          background-color: ${props => props.theme.button};
+          color: ${props => props.theme.text};
           pointer-events: none;
         }
       }
 
       .enabled {
         cursor: pointer;
+        color: ${props => props.theme.white};
       }
     }
   }

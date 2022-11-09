@@ -11,7 +11,7 @@ import imgTrashCan from '../../assets/trash-can.png'
 import { NavLink } from "react-router-dom"
 
 export function Checkout() {
-  const { listCart, removeFromCart, handleDecreaseQt, handleIncreaseQt, onChange, orderFilled, orderConfirmBtnSwitch, total, handleOrderForm, handleSubmitOrder, paymentBtnClick } = useContext(OrdersContext);
+  const { listCart, removeFromCart, handleDecreaseQt, handleIncreaseQt, onChange, orderFilled, total, handleOrderForm, handleSubmitOrder, paymentBtnClick } = useContext(OrdersContext);
 
   return (
     <CheckoutStyle>
@@ -50,24 +50,27 @@ export function Checkout() {
           <div className="payment-buttons">
             <button type="button"
               id="credit-card-btn"
+              name="Cartão de Crédito"
               onClick={(e) => paymentBtnClick(e)}
             >
               <img src={imgCreditCard} alt="" />
-              <span>CARTÃO DE CRÉDITO</span>
+              CARTÃO DE CRÉDITO
             </button>
             <button type="button"
               id="debit-card-btn"
+              name="Cartão de Débito"
               onClick={(e) => paymentBtnClick(e)}
             >
               <img src={imgDebitCard} alt="" />
-              <span>CARTÃO DE DÉBITO</span>
+              CARTÃO DE DÉBITO
             </button>
             <button type="button"
               id="money-btn"
+              name="Dinheiro"
               onClick={(e) => paymentBtnClick(e)}
             >
               <img src={imgMoney} alt="" />
-              <span>DINHEIRO</span>
+              DINHEIRO
             </button>
           </div>
         </div>
@@ -126,18 +129,12 @@ export function Checkout() {
               </tr>
               <tr className="order-confirm-holder">
                 <td colSpan={2}>
-                  {/* <button type="button" className="order-confirm"
-                    onClick={(e) => handleSubmitOrder(e)}
-                    disabled={orderConfirmBtnSwitch}
-                  >
-                    CONFIRMAR PEDIDO
-                  </button> */}
                   <NavLink to={{
                     pathname: '/success-page'
                   }}
                     className="btn-closeCart disabled"
                   >
-                    FINALIZAR
+                    CONFIRMAR PEDIDO
                   </NavLink>
                 </td>
               </tr>

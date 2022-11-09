@@ -12,4 +12,5 @@ export interface Orders {
   totalItems: number;
   valorEntrega: number;
   totalPedido: number;
+  paymentMode: string;
 }
