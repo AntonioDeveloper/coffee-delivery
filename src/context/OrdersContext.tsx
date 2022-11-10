@@ -17,9 +17,9 @@ interface OrdersContextType {
   handleDecreaseQt: (index: number) => void;
   handleIncreaseQt: (index: number) => void;
   onChange: () => void;
-  handleOrderForm: (e: any) => void;
-  handleSubmitOrder: (e: any) => void;
-  paymentBtnClick: (e: any) => void;
+  handleOrderForm: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmitOrder: (e: React.FormEvent<HTMLFormElement>) => void;
+  paymentBtnClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 interface OrdersContextProviderProps {
@@ -53,19 +53,14 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
 
   let [paymentModeChosen, setPaymentModeChosen] = useState("");
 
-  //let [paymentBtnEnable, setPaymentBtnEnable] = useState(false);
-
   const initialValue = 0;
   let delivery = 5.00;
   let total = listCart.reduce((prev, curr) => prev + (curr.quantity * curr.price), initialValue) + delivery;
 
-  function handleOrderForm(e: any) {
+  function handleOrderForm(e: React.ChangeEvent<HTMLInputElement>) {
     orderFilled.totalItems = listCart.length;
     orderFilled.valorEntrega = 5.00;
     orderFilled.totalPedido = total;
-
-
-    console.log(orderFilled.paymentMode)
 
     setOrderFilled({
       ...orderFilled, listCart: listCart, [e.target.name]: e.target.value
@@ -74,11 +69,7 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
     orderFilled.cep.length === 8 && orderFilled.rua.length > 0 && orderFilled.numero.length > 0 && orderFilled.bairro.length > 0 && orderFilled.cidade.length > 0 && orderFilled.uf.length > 0 && orderFilled.paymentMode.length > 0 ? (setOrderConfirmBtnSwitch(false), console.log('certo', orderConfirmBtnSwitch)) : (setOrderConfirmBtnSwitch(true), console.log('errado', orderConfirmBtnSwitch));
   }
 
-  useEffect(() => {
-    console.log(orderFilled);
-  }, [orderFilled]);
-
-  function handleSubmitOrder(e: any) {
+  function handleSubmitOrder(e: React.FormEvent<HTMLFormElement>) {
 
     e.preventDefault();
 
@@ -98,21 +89,23 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
 
   let btnClicked: any;
 
-  function paymentBtnClick(e: any) {
+  function paymentBtnClick(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    paymentBtnSwitch = e.target.id;
+    paymentBtnSwitch = e.currentTarget.id;
     setPaymentBtnSwitch(paymentBtnSwitch);
-    setPaymentModeChosen(e.target.name);
+    setPaymentModeChosen(e.currentTarget.name);
   }
 
   useEffect(() => {
     let paymentMode = paymentModeChosen;
     btnClicked = document.getElementById(`${paymentBtnSwitch}`);
     btnClicked?.classList.add("selected");
-    //console.log(paymentBtnSwitch, paymentModeChosen)
+
+
     setOrderFilled({
       ...orderFilled, paymentMode
     });
+
   }, [paymentBtnSwitch])
 
   useEffect(() => {
@@ -145,7 +138,6 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
 
     listCart.splice(foundProduct.id, 1);
     setListCart(listCart);
-    console.log(listCart);
 
     let el = document.querySelector(`div.prod-cart:nth-child(${foundProduct.id})`);
     if (el === null) {

@@ -11,7 +11,7 @@ import imgTrashCan from '../../assets/trash-can.png'
 import { NavLink } from "react-router-dom"
 
 export function Checkout() {
-  const { listCart, removeFromCart, handleDecreaseQt, handleIncreaseQt, onChange, orderFilled, total, handleOrderForm, handleSubmitOrder, paymentBtnClick } = useContext(OrdersContext);
+  const { listCart, removeFromCart, handleDecreaseQt, handleIncreaseQt, onChange, orderFilled, total, handleOrderForm, paymentBtnClick } = useContext(OrdersContext);
 
   return (
     <CheckoutStyle>
