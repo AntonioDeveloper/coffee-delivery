@@ -118,11 +118,11 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
 
   function addToCart(index: number) {
 
-    const foundProduct: any = products.find(prod => {
+    const foundProduct: Product = products.find(prod => {
       if (prod.id === index) {
         return prod;
       }
-    })
+    })!;
 
     listCart.push(foundProduct);
     setListCart(listCart);
@@ -165,12 +165,12 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
 
   function handleDecreaseQt(index: number) {
     if (chosenProd.quantity > 0) {
-      const findProduct: any = products.find(product => {
+      const findProduct: Product = products.find(product => {
         if (product.id === index) {
           product.quantity -= 1;
           return product;
         }
-      });
+      })!;
       setChosenProd({ ...findProduct });
       return listCart;
     } else {
