@@ -87,7 +87,7 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
     linkCloseCart?.classList.add("enabled");
   }, [orderConfirmBtnSwitch])
 
-  let btnClicked: any;
+  let btnClicked;
 
   function paymentBtnClick(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -130,11 +130,11 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
 
   function removeFromCart(index: number) {
 
-    const foundProduct: any = products.find(prod => {
+    const foundProduct: Product = products.find(prod => {
       if (prod.id === index) {
         return prod;
       }
-    })
+    })!
 
     listCart.splice(foundProduct.id, 1);
     setListCart(listCart);
@@ -153,7 +153,7 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
     console.log(foundProduct.id);
   }
 
-  const [chosenProd, setChosenProd] = useState({
+  const [chosenProd, setChosenProd] = useState<Product>({
     id: 0,
     name: "",
     cathegory: [],
@@ -178,7 +178,7 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
     }
   }
 
-  let findProduct: any;
+  let findProduct: Product;
 
   function handleIncreaseQt(index: number) {
     findProduct = products.find(product => {
@@ -186,7 +186,7 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
         product.quantity += 1;
         return product;
       }
-    });
+    })!;
     setChosenProd({ ...findProduct });
   }
 
