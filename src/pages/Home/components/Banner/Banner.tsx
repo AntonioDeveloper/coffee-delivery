@@ -13,30 +13,30 @@ export function Banner() {
         <h5 className="subtitleBanner">Com o Coffee Delivery você recebe seu café onde estiver, a qualquer hora</h5>
         <ul className="col1">
           <li className="perk1">
-            <span>
+            <span className="icon">
               <img src={cartIcon} alt="cart icon" />
             </span>
-            Compra simples e segura
+            <span className="text">Compra simples e segura </span>
           </li>
           <li className="perk2">
-            <span>
+            <span className="icon">
               <img src={clockIcon} alt="clock icon" />
             </span>
-            Entrega rápida e rastreada
+            <span className="text">Entrega rápida e rastreada </span>
           </li>
         </ul>
         <ul className="col2">
           <li className="perk3">
-            <span>
+            <span className="icon">
               <img src={boxIcon} alt="box icon" />
             </span>
-            Embalagem mantém o café intacto
+            <span className="text"> Embalagem mantém o café intacto </span>
           </li>
           <li className="perk4">
-            <span>
+            <span className="icon">
               <img src={coffeeIcon} alt="coffee icon" />
             </span>
-            O café chega fresquinho até você
+            <span className="text"> O café chega fresquinho até você </span>
           </li>
         </ul>
       </div>

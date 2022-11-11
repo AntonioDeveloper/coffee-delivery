@@ -32,55 +32,85 @@ export const BannerContainer = styled.div`
       list-style-type: none;
       margin-top: 4.1rem;
 
-      span {
-        border-radius: 50px;
-        width: 2rem;
-        height: 2rem;
-        padding: 0.5rem;
-      }
-
       .perk1 {
         font-size: .9rem;
         font-family: "Roboto", sans-serif;
         margin-bottom: 1.2rem;
+        display: flex;
 
-        span {
+        .icon {
           background: ${(props) => props.theme.yellowDark};
-          margin-right: .2rem;
+          margin-right: .4rem;
+          width: 2rem;
+          height: 2rem;
+          padding: 0.5rem;
+          border-radius: 50px;
+
+          display: flex;
+        }
+
+        .text {
+          width: 60%;
         }
       }
 
       .perk2 {
         font-size: .9rem;
         font-family: "Roboto", sans-serif;
+        margin-bottom: 1.2rem;
+        display: flex;
 
-        span {
+        .icon {
           background: ${(props) => props.theme.yellow};
-          margin-right: .2rem;
+          margin-right: .4rem;
+          width: 2rem;
+          height: 2rem;
+          padding: 0.5rem;
+          border-radius: 50px;
+
+          display: flex;
+        }
+
+        .text {
+          width: 60%;
         }
       }
 
       .perk3 {
         font-size: .9rem;
         font-family: "Roboto", sans-serif;
+        margin-bottom: 1.2rem;
+        display: flex;
         
-        span {
+        .icon {
           background: ${(props) => props.theme.text};
+          margin-right: .4rem;
+          width: 2rem;
+          height: 2rem;
+          padding: 0.5rem;
+          border-radius: 50px;
+
+          display: flex;
         }
       }
 
       .perk4 {
         font-size: .9rem;
         font-family: "Roboto", sans-serif;
+        margin-bottom: 1.2rem;
+        display: flex;
         
-        span {
+        .icon {
           background: ${(props) => props.theme.purple};
+          margin-right: .4rem;
+          width: 2rem;
+          height: 2rem;
+          padding: 0.5rem;
+          border-radius: 50px;
+
+          display: flex;
         }
       }
-    }
-
-    .col2 {
-      display: none;
     }
   }
 

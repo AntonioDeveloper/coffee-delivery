@@ -122,7 +122,7 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
       if (prod.id === index) {
         return prod;
       }
-    })!;
+    })!; //Exclamation point garante que a variável não vai ser null e sim o tipo Produto
 
     listCart.push(foundProduct);
     setListCart(listCart);
