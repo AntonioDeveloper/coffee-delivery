@@ -12,5 +12,5 @@ O objetivo foi criar uma loja virtual com página de catálogo, checkout e pedid
 - React JS
 
 ![Catalog Page](./src/github-images/coffee-delivery_home.png "Catalog Page")
-![Checkout Page](./src/github-images/coffee-delivery_checkout.jpg "Checkout Page")
+![Checkout Page](./src/github-images/coffee-delivery_checkout_2.jpg "Checkout Page")
 ![Order Confirmed Page](./src/github-images/coffee-delivery_order-confirm.jpg "Order Confirmed Page")
