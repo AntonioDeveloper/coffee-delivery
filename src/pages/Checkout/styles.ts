@@ -132,24 +132,63 @@ export const CheckoutStyle = styled.main`
 
       .payment-buttons {
         display: flex;
+        width: 100%;
         justify-content: space-between;
 
-        button {
-          font-size: 0.75rem;
+        input[type="radio"] {
+          appearance: none;
+          -webkit-appearance: none;
+          font-size: 0.7rem;
           padding: 0.2rem;
           background-color: ${props => props.theme.button};
           color: ${props => props.theme.text};
           border-radius: 6px;
           border: none;
-          width: 30%;
+          width: 32%;
           display: flex;
           flex-direction: column;
           align-items: center;
           cursor: pointer;
+          
+          &:checked {
+            background-color: ${props => props.theme.purpleLight} !important;
+            border: 1px solid ${props => props.theme.purple};
+          }
+
+          &:focus {
+            outline: 1px solid ${props => props.theme.purpleDark};
+            outline-offset: 0px;
+            box-shadow: 0 0 0 2px ${props => props.theme.purpleDark}; 
+          }
         }
-        .selected {
-          background-color: ${props => props.theme.purpleLight} !important;
-          border: 1px solid ${props => props.theme.purple};
+
+        #credit-card-btn {
+          &:before {
+            content: url("../src/assets/credit-card.png");
+          }
+          &:after {
+            content: "Cartão de Crédito";
+            text-transform: uppercase;
+          }
+        }
+
+        #debit-card-btn {
+          &:before {
+            content: url("../src/assets/debit-card.png");
+          }
+          &:after {
+            content: "Cartão de Débito";
+            text-transform: uppercase;
+          }
+        }
+        #money-btn {
+          &:before {
+            content: url("../src/assets/money.png");
+          }
+          &:after {
+            content: "Dinheiro";
+            text-transform: uppercase;
+          }
         }
       }
     }

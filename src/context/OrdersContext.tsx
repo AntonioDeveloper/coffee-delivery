@@ -19,7 +19,10 @@ interface OrdersContextType {
   onChange: () => void;
   handleOrderForm: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmitOrder: (e: React.FormEvent<HTMLFormElement>) => void;
-  paymentBtnClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  paymentBtnClick: (e: React.MouseEvent<HTMLInputElement>) => void;
+  checkedCredit: boolean;
+  checkedDebit: boolean;
+  checkedMoney: boolean;
 }
 
 interface OrdersContextProviderProps {
@@ -53,6 +56,10 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
 
   let [paymentModeChosen, setPaymentModeChosen] = useState("");
 
+  let [checkedCredit, setCheckedCredit] = useState(false);
+  let [checkedDebit, setCheckedDebit] = useState(false);
+  let [checkedMoney, setCheckedMoney] = useState(false);
+
   const initialValue = 0;
   let delivery = 5.00;
   let total = listCart.reduce((prev, curr) => prev + (curr.quantity * curr.price), initialValue) + delivery;
@@ -81,30 +88,57 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
   }
 
   const linkCloseCart = document.querySelector(".btn-closeCart")
+
   useEffect(() => {
     orderConfirmBtnSwitch = !true
     linkCloseCart?.classList.remove("disabled");
     linkCloseCart?.classList.add("enabled");
   }, [orderConfirmBtnSwitch])
 
-  let btnClicked;
+  let btnClicked: any;
 
-  function paymentBtnClick(e: React.MouseEvent<HTMLButtonElement>) {
+
+  function paymentBtnClick(e: React.MouseEvent<HTMLInputElement>) {
     e.preventDefault();
     paymentBtnSwitch = e.currentTarget.id;
     setPaymentBtnSwitch(paymentBtnSwitch);
     setPaymentModeChosen(e.currentTarget.name);
+
+
+
   }
 
   useEffect(() => {
     let paymentMode = paymentModeChosen;
-    btnClicked = document.getElementById(`${paymentBtnSwitch}`);
-    btnClicked?.classList.add("selected");
-
-
+    btnClicked = document.getElementById(`${paymentBtnSwitch}`)!;
     setOrderFilled({
+
       ...orderFilled, paymentMode
     });
+
+    switch (paymentModeChosen) {
+      case "Cartão de Crédito":
+        setCheckedCredit(!false);
+        setCheckedDebit(false);
+        setCheckedMoney(false);
+        break;
+      case "Cartão de Débito":
+        setCheckedCredit(false);
+        setCheckedDebit(!false);
+        setCheckedMoney(false);
+        break;
+      case "Dinheiro":
+        setCheckedCredit(false);
+        setCheckedDebit(false);
+        setCheckedMoney(!false);
+        break;
+      default:
+        setCheckedCredit(false);
+        setCheckedDebit(false);
+        setCheckedMoney(false);
+    }
+
+    console.log(paymentModeChosen);
 
   }, [paymentBtnSwitch])
 
@@ -126,6 +160,15 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
 
     listCart.push(foundProduct);
     setListCart(listCart);
+    total = listCart.reduce((prev, curr) => prev + (curr.quantity * curr.price), initialValue) + delivery;
+
+    orderFilled.totalPedido = total;
+
+    setOrderFilled({
+      ...orderFilled, listCart: listCart
+    });
+
+    console.log(listCart, total);
   }
 
   function removeFromCart(index: number) {
@@ -151,6 +194,17 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
     }
 
     console.log(foundProduct.id);
+
+    // let removedFromTotal = listCart.reduce((prev, curr) => prev + (curr.quantity * curr.price), initialValue);
+    // console.log("Removed", total - removedFromTotal);
+    // total = total - removedFromTotal;
+
+    // orderFilled.totalPedido = total;
+
+    // setOrderFilled({
+    //   ...orderFilled, listCart: listCart
+    // });
+
   }
 
   const [chosenProd, setChosenProd] = useState<Product>({
@@ -195,7 +249,7 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
   }
 
   return (
-    <OrdersContext.Provider value={{ listCart, products, addToCart, removeFromCart, chosenProd, handleDecreaseQt, handleIncreaseQt, onChange, orderFilled, orderConfirmBtnSwitch, delivery, total, handleOrderForm, handleSubmitOrder, paymentBtnClick }}>
+    <OrdersContext.Provider value={{ listCart, products, addToCart, removeFromCart, chosenProd, handleDecreaseQt, handleIncreaseQt, onChange, orderFilled, orderConfirmBtnSwitch, delivery, total, checkedCredit, checkedDebit, checkedMoney, handleOrderForm, handleSubmitOrder, paymentBtnClick }}>
       {children}
     </OrdersContext.Provider>
   )

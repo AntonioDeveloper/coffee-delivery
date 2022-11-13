@@ -1,9 +1,6 @@
 import { CheckoutStyle } from "./styles"
 import imgLocalPin from "../../assets/local-pin.png"
 import imgDolar from "../../assets/dolar-icon.png"
-import imgCreditCard from "../../assets/credit-card.png"
-import imgDebitCard from "../../assets/debit-card.png"
-import imgMoney from "../../assets/money.png"
 import { useContext } from "react"
 import { OrdersContext } from "../../context/OrdersContext"
 import { InputQuantity } from "../Home/components/InputQuantity/InputQuantity"
@@ -11,7 +8,18 @@ import imgTrashCan from '../../assets/trash-can.png'
 import { NavLink } from "react-router-dom"
 
 export function Checkout() {
-  const { listCart, removeFromCart, handleDecreaseQt, handleIncreaseQt, onChange, orderFilled, total, handleOrderForm, paymentBtnClick } = useContext(OrdersContext);
+  const { listCart, removeFromCart, handleDecreaseQt, handleIncreaseQt, onChange, orderFilled, total, checkedCredit, checkedDebit, checkedMoney, handleOrderForm, paymentBtnClick } = useContext(OrdersContext);
+
+  function handleCreditChange(e: any) {
+    e.target.checked = checkedCredit;
+  }
+
+  function handleDebitChange(e: any) {
+    e.target.checked = checkedDebit;
+  }
+  function handleMoneyChange(e: any) {
+    e.target.checked = checkedMoney;
+  }
 
   return (
     <CheckoutStyle>
@@ -47,32 +55,37 @@ export function Checkout() {
               <h4>O pagamento é feito na entrega. Escolha a forma que deseja pagar</h4>
             </div>
           </div>
-          <div className="payment-buttons">
-            <button type="button"
+          <form action="" className="payment-buttons">
+            <input
+              type="radio"
               id="credit-card-btn"
               name="Cartão de Crédito"
               onClick={(e) => paymentBtnClick(e)}
-            >
-              <img src={imgCreditCard} alt="" />
-              CARTÃO DE CRÉDITO
-            </button>
-            <button type="button"
+              checked={checkedCredit}
+              //onChange serve para mudar o valor de checked acima, de acordo com o estado 
+              // que vem de cada botão
+              onChange={handleCreditChange}
+            />
+
+            <input
+              type="radio"
               id="debit-card-btn"
               name="Cartão de Débito"
               onClick={(e) => paymentBtnClick(e)}
-            >
-              <img src={imgDebitCard} alt="" />
-              CARTÃO DE DÉBITO
-            </button>
-            <button type="button"
+              checked={checkedDebit}
+              onChange={handleDebitChange}
+            />
+
+            <input
+              type="radio"
               id="money-btn"
               name="Dinheiro"
               onClick={(e) => paymentBtnClick(e)}
-            >
-              <img src={imgMoney} alt="" />
-              DINHEIRO
-            </button>
-          </div>
+              checked={checkedMoney}
+              onChange={handleMoneyChange}
+            />
+
+          </form>
         </div>
       </section>
       <section className="minicart-side">
@@ -81,7 +94,7 @@ export function Checkout() {
           <div className="selected-prods">
             {listCart.map((item, index) => {
               return (
-                <div className="prod-cart" key={item.id}>
+                <div className="prod-cart" key={index}>
                   <img src={item.image} alt={item.name} />
                   <div className="prod-quantity">
                     <span>{item.name}</span>

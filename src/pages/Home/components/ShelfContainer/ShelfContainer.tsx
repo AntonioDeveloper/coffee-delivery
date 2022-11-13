@@ -8,7 +8,7 @@ import { OrdersContext } from "../../../../context/OrdersContext";
 
 export function ShelfContainer() {
 
-  const { products, chosenProd, handleDecreaseQt, handleIncreaseQt, onChange, addToCart, listCart } = useContext(OrdersContext);
+  const { products, chosenProd, handleDecreaseQt, handleIncreaseQt, onChange, addToCart } = useContext(OrdersContext);
 
   return (
     <ShelfStylesContainer>
