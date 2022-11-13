@@ -10,14 +10,14 @@ import { NavLink } from "react-router-dom"
 export function Checkout() {
   const { listCart, removeFromCart, handleDecreaseQt, handleIncreaseQt, onChange, orderFilled, total, checkedCredit, checkedDebit, checkedMoney, handleOrderForm, paymentBtnClick } = useContext(OrdersContext);
 
-  function handleCreditChange(e: any) {
+  function handleCreditChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.target.checked = checkedCredit;
   }
 
-  function handleDebitChange(e: any) {
+  function handleDebitChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.target.checked = checkedDebit;
   }
-  function handleMoneyChange(e: any) {
+  function handleMoneyChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.target.checked = checkedMoney;
   }
 
@@ -105,7 +105,7 @@ export function Checkout() {
                         <InputQuantity change={onChange} value={item.quantity} clicado={item.id} idGeral={item.id} productQuantity={item.quantity} />
                         <button className="increase" onClick={() => handleIncreaseQt(index = item.id)}>+</button>
                       </div>
-                      <button className="remove-from-cart" id={item.name} onClick={() => removeFromCart(index = item.id)}>
+                      <button className="remove-from-cart" id={item.name} onClick={(e) => removeFromCart(e, index)}>
                         <img src={imgTrashCan} alt="" />
                         REMOVER
                       </button>

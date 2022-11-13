@@ -14,9 +14,9 @@ export function ShelfContainer() {
     <ShelfStylesContainer>
       <h1>Nossos cafés</h1>
       <div className="product-container">
-        {products.map((product, index) => {
+        {products.map((product) => {
           return (
-            <div className="coffee-item" key={index}>
+            <div className="coffee-item" key={product.id}>
               <img src={product.image} alt={product.name} />
               <div className="cathegory-container">
                 {
@@ -33,10 +33,10 @@ export function ShelfContainer() {
               <div className="prod-card-footer">
                 <span className="price"><span>R$</span> {product.price}</span>
                 <div className="product-quantity-selector">
-                  <button className="decrease" onClick={() => handleDecreaseQt(index)}>-</button>
+                  <button className="decrease" onClick={() => handleDecreaseQt(product.id)}>-</button>
                   <InputQuantity change={onChange} value={chosenProd.quantity} clicado={chosenProd.id} idGeral={product.id} productQuantity={product.quantity} />
-                  <button className="increase" onClick={() => handleIncreaseQt(index)}>+</button>
-                  <button className="push-to-cart" id={product.name} onClick={() => addToCart(index)}></button>
+                  <button className="increase" onClick={() => handleIncreaseQt(product.id)}>+</button>
+                  <button className="push-to-cart" id={product.name} onClick={() => addToCart(product.id)}></button>
                 </div>
               </div>
             </div>

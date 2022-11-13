@@ -13,7 +13,7 @@ interface OrdersContextType {
   total: number;
   chosenProd: Product;
   addToCart: (index: number) => void;
-  removeFromCart: (index: number) => void;
+  removeFromCart: (e: React.MouseEvent<HTMLButtonElement>, index: number) => void;
   handleDecreaseQt: (index: number) => void;
   handleIncreaseQt: (index: number) => void;
   onChange: () => void;
@@ -59,6 +59,8 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
   let [checkedCredit, setCheckedCredit] = useState(false);
   let [checkedDebit, setCheckedDebit] = useState(false);
   let [checkedMoney, setCheckedMoney] = useState(false);
+
+  let [removeButtonName, setRemoveButtonName] = useState('');
 
   const initialValue = 0;
   let delivery = 5.00;
@@ -171,7 +173,8 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
     console.log(listCart, total);
   }
 
-  function removeFromCart(index: number) {
+  function removeFromCart(e: any, index: number) {
+    setRemoveButtonName(e.target.id);
 
     const foundProduct: Product = products.find(prod => {
       if (prod.id === index) {
@@ -179,33 +182,16 @@ export function OrdersContextProvider({ children }: OrdersContextProviderProps) 
       }
     })!
 
-    listCart.splice(foundProduct.id, 1);
+    const i = products.indexOf(foundProduct);
+    listCart.splice(i, 1);
     setListCart(listCart);
 
-    let el = document.querySelector(`div.prod-cart:nth-child(${foundProduct.id})`);
-    if (el === null) {
-      el = document.querySelector(`div.prod-cart:first-child`);
-      el?.remove();
-      console.log(el, foundProduct.id);
-    } else {
-      el = document.querySelector(`div.prod-cart:nth-child(${foundProduct.id})`);
-      el?.remove();
-      console.log(el, foundProduct.id);
-    }
-
-    console.log(foundProduct.id);
-
-    // let removedFromTotal = listCart.reduce((prev, curr) => prev + (curr.quantity * curr.price), initialValue);
-    // console.log("Removed", total - removedFromTotal);
-    // total = total - removedFromTotal;
-
-    // orderFilled.totalPedido = total;
-
-    // setOrderFilled({
-    //   ...orderFilled, listCart: listCart
-    // });
-
   }
+
+  useEffect(() => {
+    console.log(removeButtonName, listCart);
+  }, [removeButtonName])
+
 
   const [chosenProd, setChosenProd] = useState<Product>({
     id: 0,
