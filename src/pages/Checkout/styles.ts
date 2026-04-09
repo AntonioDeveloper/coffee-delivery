@@ -7,23 +7,23 @@ export const CheckoutStyle = styled.main`
 
   display: flex;
   justify-content: space-between;
-  
+
   .form-side {
     width: 58%;
-    font-family: "Roboto", sans-serif; 
+    font-family: 'Roboto', sans-serif;
 
     h3 {
-      font-family: "Baloo 2", sans-serif;
+      font-family: 'Baloo 2', sans-serif;
       line-height: 130%;
       font-size: 1.12rem;
-      color: ${props => props.theme.subtitle};
-      margin-bottom: .95rem;
+      color: ${(props) => props.theme.subtitle};
+      margin-bottom: 0.95rem;
     }
 
     .form-container {
       width: 100%;
       height: 23.25rem;
-      background-color: ${props => props.theme.card};
+      background-color: ${(props) => props.theme.card};
       padding: 2.5rem;
       border-radius: 6px;
 
@@ -31,51 +31,50 @@ export const CheckoutStyle = styled.main`
         margin-top: 2rem;
 
         input {
-          background-color: ${props => props.theme.button};
+          background-color: ${(props) => props.theme.button};
           padding: 0.75rem;
-          border: 1px solid ${props => props.theme.button};
+          border: 1px solid ${(props) => props.theme.button};
           border-radius: 4px;
           margin: 0.25rem 0;
         }
 
-        input[placeholder="CEP"] {
+        input[placeholder='CEP'] {
           width: 33.3%;
           display: inline-block;
         }
 
-        input[placeholder="Rua"] {
+        input[placeholder='Rua'] {
           width: 100%;
           display: block;
         }
 
-        input[placeholder="Número"] {
+        input[placeholder='Número'] {
           width: 33.3%;
           display: inline-block;
         }
 
-        input[placeholder="Complemento"] {
+        input[placeholder='Complemento'] {
           width: 64%;
           display: inline-block;
           float: right;
         }
 
-        input[placeholder="Bairro"] {
+        input[placeholder='Bairro'] {
           width: 33.3%;
           display: inline-block;
           margin-right: 2%;
         }
 
-        input[placeholder="Cidade"] {
+        input[placeholder='Cidade'] {
           width: 52%;
           display: inline-block;
         }
 
-        input[placeholder="UF"] {
+        input[placeholder='UF'] {
           width: 10%;
           display: inline-block;
           float: right;
         }
-
       }
 
       .headline {
@@ -90,14 +89,14 @@ export const CheckoutStyle = styled.main`
           font-size: 1rem;
           font-weight: 400;
           line-height: 130%;
-          color: ${props => props.theme.subtitle};
+          color: ${(props) => props.theme.subtitle};
         }
 
         h4 {
-          font-size: .9rem;
+          font-size: 0.9rem;
           font-weight: 400;
           line-height: 130%;
-          color: ${props => props.theme.subtitle};
+          color: ${(props) => props.theme.subtitle};
         }
       }
     }
@@ -105,7 +104,7 @@ export const CheckoutStyle = styled.main`
     .payment-ways {
       width: 100%;
       height: 12.94rem;
-      background-color: ${props => props.theme.card};
+      background-color: ${(props) => props.theme.card};
       margin-top: 0.75rem;
       border-radius: 6px;
       padding: 2.5rem;
@@ -118,7 +117,7 @@ export const CheckoutStyle = styled.main`
           font-weight: 400;
           font-size: 1rem;
           line-height: 130%;
-          color: ${props => props.theme.subtitle};
+          color: ${(props) => props.theme.subtitle};
         }
 
         h4 {
@@ -126,7 +125,7 @@ export const CheckoutStyle = styled.main`
           font-weight: 400;
           font-size: 14px;
           line-height: 130%;
-          color: ${props => props.theme.subtitle};
+          color: ${(props) => props.theme.subtitle};
         }
       }
 
@@ -135,13 +134,13 @@ export const CheckoutStyle = styled.main`
         width: 100%;
         justify-content: space-between;
 
-        input[type="radio"] {
+        input[type='radio'] {
           appearance: none;
           -webkit-appearance: none;
           font-size: 0.7rem;
           padding: 0.2rem;
-          background-color: ${props => props.theme.button};
-          color: ${props => props.theme.text};
+          background-color: ${(props) => props.theme.button};
+          color: ${(props) => props.theme.text};
           border-radius: 6px;
           border: none;
           width: 32%;
@@ -149,44 +148,44 @@ export const CheckoutStyle = styled.main`
           flex-direction: column;
           align-items: center;
           cursor: pointer;
-          
+
           &:checked {
-            background-color: ${props => props.theme.purpleLight} !important;
-            border: 1px solid ${props => props.theme.purple};
+            background-color: ${(props) => props.theme.purpleLight} !important;
+            border: 1px solid ${(props) => props.theme.purple};
           }
 
           &:focus {
-            outline: 1px solid ${props => props.theme.purpleDark};
+            outline: 1px solid ${(props) => props.theme.purpleDark};
             outline-offset: 0px;
-            box-shadow: 0 0 0 2px ${props => props.theme.purpleDark}; 
+            box-shadow: 0 0 0 2px ${(props) => props.theme.purpleDark};
           }
         }
 
         #credit-card-btn {
           &:before {
-            content: url("../src/assets/credit-card.png");
+            content: url('../src/assets/credit-card.png');
           }
           &:after {
-            content: "Cartão de Crédito";
+            content: 'Cartão de Crédito';
             text-transform: uppercase;
           }
         }
 
         #debit-card-btn {
           &:before {
-            content: url("../src/assets/debit-card.png");
+            content: url('../src/assets/debit-card.png');
           }
           &:after {
-            content: "Cartão de Débito";
+            content: 'Cartão de Débito';
             text-transform: uppercase;
           }
         }
         #money-btn {
           &:before {
-            content: url("../src/assets/money.png");
+            content: url('../src/assets/money.png');
           }
           &:after {
-            content: "Dinheiro";
+            content: 'Dinheiro';
             text-transform: uppercase;
           }
         }
@@ -198,33 +197,33 @@ export const CheckoutStyle = styled.main`
     width: 38%;
 
     h3 {
-      font-family: "Baloo 2", sans-serif; 
-      margin-bottom: .95rem;
+      font-family: 'Baloo 2', sans-serif;
+      margin-bottom: 0.95rem;
     }
     .summary-container {
       width: 100%;
       height: 31rem;
       position: relative;
-      background-color: ${props => props.theme.card};
+      background-color: ${(props) => props.theme.card};
       padding: 2.5rem;
       border-radius: 6px 44px;
-  
-      font-family: "Roboto", sans-serif; 
+
+      font-family: 'Roboto', sans-serif;
 
       .selected-prods {
         max-height: 16rem;
         overflow-y: auto;
 
         &::-webkit-scrollbar {
-          width: .4rem;
+          width: 0.4rem;
         }
 
         &::-webkit-scrollbar-track {
-          -webkit-box-shadow: inset 0 0 6px ${props => props.theme.background};
+          -webkit-box-shadow: inset 0 0 6px ${(props) => props.theme.background};
         }
 
         &::-webkit-scrollbar-thumb {
-          background-color: ${props => props.theme.button};
+          background-color: ${(props) => props.theme.button};
         }
 
         .prod-cart {
@@ -232,23 +231,23 @@ export const CheckoutStyle = styled.main`
           justify-content: space-between;
           width: 96%;
           padding: 1.5rem 0;
-          border-bottom: 1px solid #E6E5E5;
-  
+          border-bottom: 1px solid #e6e5e5;
+
           img {
             width: 22%;
             height: 22%;
           }
-  
+
           .prod-quantity {
             font-size: 1rem;
             width: 75%;
-  
+
             span {
-              font-size: .9rem;
+              font-size: 0.9rem;
               line-height: 130%;
-  
+
               &:first-child {
-                margin-right: .6rem;
+                margin-right: 0.6rem;
               }
 
               &:nth-child(2) {
@@ -256,51 +255,52 @@ export const CheckoutStyle = styled.main`
               }
             }
           }
-  
+
           .product-quantity-selector {
             display: flex;
             width: 100%;
-            margin: .5rem 0;
-  
+            margin: 0.5rem 0;
+
             .inputs-quantity {
               width: 48%;
               display: flex;
             }
-  
+
             #input-quantity {
-              background-color: ${props => props.theme.button};
+              background-color: ${(props) => props.theme.button};
               width: 1.5rem;
-              padding: 0 .5rem;
+              padding: 0 0.5rem;
             }
-  
-            .decrease, .increase {
+
+            .decrease,
+            .increase {
               border: 0;
-              background-color: ${props => props.theme.button};
+              background-color: ${(props) => props.theme.button};
               width: 1.5rem;
-              padding: 0 .5rem;
+              padding: 0 0.5rem;
               cursor: pointer;
             }
-  
+
             .decrease {
-              border-radius: 6px 0  0 6px;
+              border-radius: 6px 0 0 6px;
             }
-  
+
             .increase {
-              border-radius: 0 6px  6px 0;
+              border-radius: 0 6px 6px 0;
             }
-  
+
             .remove-from-cart {
               border: 0;
-              background-color: ${props => props.theme.button};
-              color: ${props => props.theme.text};
-              font-size: .8rem;
-              padding: 0 .5rem;
+              background-color: ${(props) => props.theme.button};
+              color: ${(props) => props.theme.text};
+              font-size: 0.8rem;
+              padding: 0 0.5rem;
               border-radius: 6px;
               cursor: pointer;
-  
+
               display: flex;
               align-items: center;
-  
+
               img {
                 width: 1rem;
                 height: 1rem;
@@ -322,10 +322,10 @@ export const CheckoutStyle = styled.main`
 
       .btn-closeCart {
         width: 100%;
-        padding: .75rem .5rem;
+        padding: 0.75rem 0.5rem;
         margin-top: 1.5rem;
-        background-color: ${props => props.theme.yellow};
-        color: ${props => props.theme.white};
+        background-color: ${(props) => props.theme.yellow};
+        color: ${(props) => props.theme.white};
         border-radius: 6px;
         border: none;
         display: block;
@@ -333,16 +333,16 @@ export const CheckoutStyle = styled.main`
         text-align: center;
 
         &.disabled {
-          background-color: ${props => props.theme.button};
-          color: ${props => props.theme.text};
+          background-color: ${(props) => props.theme.button};
+          color: ${(props) => props.theme.text};
           pointer-events: none;
         }
       }
 
       .enabled {
         cursor: pointer;
-        color: ${props => props.theme.white};
+        color: ${(props) => props.theme.white};
       }
     }
   }
-`	
+`

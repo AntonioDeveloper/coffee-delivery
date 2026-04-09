@@ -1,23 +1,24 @@
-import { useContext } from "react";
-import { OrdersContext } from "../../context/OrdersContext";
-import { SuccessPageStyle } from "./styles";
+import { useContext } from 'react'
+import { OrdersContext } from '../../context/OrdersContext'
+import { SuccessPageStyle } from './styles'
 import imgPoint from '../../assets/pinpoint-white.png'
 import imgClock from '../../assets/clock.png'
 import imgDollar from '../../assets/dolar-icon-order-confirm.png'
 import imgDeliveryMan from '../../assets/delivery-illustration.png'
 
 export function SuccessPage() {
-
   const { orderFilled } = useContext(OrdersContext)
 
-  console.log(orderFilled);
+  console.log(orderFilled)
 
   return (
     <SuccessPageStyle>
       <div className="order-info">
         <div className="inner">
           <h2 className="order-confirm-msg">Uhu! Pedido confirmado</h2>
-          <p className="order-confirm-sub">Agora é só aguardar que logo o café chegará até você</p>
+          <p className="order-confirm-sub">
+            Agora é só aguardar que logo o café chegará até você
+          </p>
           <div className="order-summary-info">
             <div className="line">
               <div className="icon">
@@ -25,7 +26,12 @@ export function SuccessPage() {
               </div>
               <div className="text">
                 <p>
-                  Entrega em <strong> {orderFilled.rua}, {orderFilled.numero}</strong> <br /> {orderFilled.cidade} - {orderFilled.uf}
+                  Entrega em{' '}
+                  <strong>
+                    {' '}
+                    {orderFilled.rua}, {orderFilled.numero}
+                  </strong>{' '}
+                  <br /> {orderFilled.cidade} - {orderFilled.uf}
                 </p>
               </div>
             </div>

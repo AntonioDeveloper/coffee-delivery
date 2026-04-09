@@ -1,10 +1,9 @@
 export interface InputProps {
+  min?: number
 
-  min?: number;
+  max?: number
 
-  max?: number;
-
-  increment?: number;
+  increment?: number
 
   decrement?: number
 

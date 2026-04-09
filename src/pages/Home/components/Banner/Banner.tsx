@@ -1,4 +1,4 @@
-import { BannerContainer } from "./styles";
+import { BannerContainer } from './styles'
 import cartIcon from '../../../../assets/cart-white.png'
 import clockIcon from '../../../../assets/clock.png'
 import boxIcon from '../../../../assets/box.png'
@@ -9,8 +9,13 @@ export function Banner() {
   return (
     <BannerContainer>
       <div className="perks">
-        <h1 className="bannerTitle">Encontre o café perfeito para qualquer hora do dia</h1>
-        <h5 className="subtitleBanner">Com o Coffee Delivery você recebe seu café onde estiver, a qualquer hora</h5>
+        <h1 className="bannerTitle">
+          Encontre o café perfeito para qualquer hora do dia
+        </h1>
+        <h5 className="subtitleBanner">
+          Com o Coffee Delivery você recebe seu café onde estiver, a qualquer
+          hora
+        </h5>
         <ul className="col1">
           <li className="perk1">
             <span className="icon">

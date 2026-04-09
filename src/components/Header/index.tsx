@@ -1,8 +1,8 @@
-import { HeaderContainer } from "./styles"
+import { HeaderContainer } from './styles'
 import logoCoffee from '../../assets/logo.png'
 import point from '../../assets/pinpoint.png'
 import cart from '../../assets/cart.png'
-import { NavLink } from "react-router-dom"
+import { NavLink } from 'react-router-dom'
 
 export function Header() {
   return (

@@ -10,8 +10,14 @@
     "lint": "eslint src --ext .ts,.tsx",
     "lint-fix-all": "eslint src --ext .ts,.tsx --fix",
     "server": "npx json-server --watch src/database/products.json",
+    "dev:api": "npm --prefix backend run dev",
+    "start:api": "npm --prefix backend run start",
     "start": "concurrently \"npm run server\" \"npm run dev\"",
-    "start-yarn": "yarn run server & yarn run dev"
+    "start-yarn": "yarn run server & yarn run dev",
+    "prisma:generate": "npm --prefix backend run prisma:generate",
+    "prisma:migrate": "npm --prefix backend run prisma:migrate",
+    "prisma:studio": "npm --prefix backend run prisma:studio",
+    "prisma:seed": "npm --prefix backend run prisma:seed"
   },
   "dependencies": {
     "axios": "^1.1.3",
